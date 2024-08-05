@@ -83,7 +83,3 @@ print("PPV for Logistic Regression Model:", ppv_lr)
 print("PPV for Decision Tree Model:", ppv_dt)
 print("AUC for Logistic Regression Model:", auc_lr)
 print("AUC for Decision Tree Model:", auc_dt)
-
-# Do both metrics agree that one model is more accurate than the other?
-print("Do both metrics agree that one model is more accurate than the other?")
-# Answer based on the PPV and AUC values
