@@ -19,8 +19,6 @@ from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.model_selection import StratifiedKFold as KFold_strat
 from sklearn.linear_model import LogisticRegression as lr
 
-
-# Your code here
 # Read in df_arrests
 df_arrests = pd.read_csv('data/df_arrests.csv')
 

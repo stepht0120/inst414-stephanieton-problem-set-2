@@ -19,16 +19,14 @@ PART 2: Pre-processing
 # import the necessary packages
 import pandas as pd
 
-
-# Your code here
-# Load data
+# loading in data
 pred_universe_raw = pd.read_csv('data/pred_universe_raw.csv')
 arrest_events_raw = pd.read_csv('data/arrest_events_raw.csv')
 
-# Perform a full outer join/merge on 'person_id'
+# perform a full outer join/merge on 'person_id'
 df_arrests = pd.merge(pred_universe_raw, arrest_events_raw, on='person_id', how='outer')
 
-# Create a column 'y' which equals 1 if the person was arrested for a felony crime in the 365 days after their arrest date
+# create a column 'y' which equals 1 if the person was arrested for a felony crime in the 365 days after their arrest date
 df_arrests['y'] = df_arrests.apply(
     lambda row: any((row['arrest_date_event'] > row['arrest_date_univ']) & 
                     (row['arrest_date_event'] <= row['arrest_date_univ'] + pd.Timedelta(days=365)) & 
@@ -36,12 +34,12 @@ df_arrests['y'] = df_arrests.apply(
     axis=1
 )
 
-# What share of arrestees were rearrested for a felony crime in the next year?
+# what share of arrestees were rearrested for a felony crime in the next year?
 share_rearrested_felony = df_arrests['y'].mean()
 print("What share of arrestees in the df_arrests table were rearrested for a felony crime in the next year?")
 print(share_rearrested_felony)
 
-# Create a predictive feature 'current_charge_felony' which equals 1 if the current arrest was for a felony charge, and 0 otherwise
+# create a predictive feature 'current_charge_felony' which equals 1 if the current arrest was for a felony charge, and 0 otherwise
 df_arrests['current_charge_felony'] = df_arrests['charge_category'].apply(lambda x: 1 if x == 'felony' else 0)
 
 # What share of current charges are felonies?
